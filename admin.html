@@ -1,1 +1,34 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CIT Store Admin Dashboard</title>
+</head>
+<body>
+<h1>Admin Page</h1>
+<input id="name" placeholder="Item name">
+<input id="price" placeholder="Price">
+<input id="image" placeholder="Image">
+<button onclick="addItem()"> Add Item</button>
+<script>
+const APPSCRIPT = "https://script.google.com/macros/s/AKfycbzb2VPeM4l9AkLgq_nP4jRmAnc47iAcfoILG77nLbWnMgCKrjGHG_yxOYcYAQzNvi-85g/exec";
+function addItem() {
+  let item = {
+    name: document.getElementById("name").value,
+    price: document.getElementById("price").value,
+    image: document.getElementById("image").value
+  };
+  fetch(APPSCRIPT, {
+    method: "POST",
+    body: JSON.stringify(item)
+  })
+  .then(res=>res.text())
+  .then(data=>{
+    alert("Item Added Successfully!")
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+    document.getElementById("image").value="";
+  });
+}
+</script>
+</body>
+</html>
