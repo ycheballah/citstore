@@ -27,7 +27,11 @@ function addItem() {
     document.getElementById("name").value="";
     document.getElementById("price").value="";
     document.getElementById("image").value="";
-  });
+  })
+  .catch(err => {
+  console.error("ERROR:", err);
+  alert("Something failed — check console");
+});
 }
 </script>
 </body>
