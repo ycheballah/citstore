@@ -1,1 +1,28 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CIT Store Item</title>
+</head>
+<body>
+<div id="item"></div>
+<script>
+const APPSCRIPT = "https://script.google.com/macros/s/AKfycbzb2VPeM4l9AkLgq_nP4jRmAnc47iAcfoILG77nLbWnMgCKrjGHG_yxOYcYAQzNvi-85g/exec";
+let params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+fetch(APPSCRIPT)
+  .then(res => res.json())
+  .then(items => {
+    let item = items.find(i=>i.id == id);
+    let container = document.getElementById("item");
+    if (item) {
+      container.innerHTML = '
+        <h1>${item.name}</h1>
+        <p>Price: $${item.price}</p>
+        ';
+     } else {
+      container.innerHTML = "Item Not Found";
+    }
+  });
+</script>
+</body>
+</html>
