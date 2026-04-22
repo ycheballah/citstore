@@ -1,1 +1,24 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CIT Store</title>
+</head>
+<body>
+<h1>Items</h1>
+<div id="list"></div>
+<script>
+const APPSCRIPT = "https://script.google.com/macros/s/AKfycbzb2VPeM4l9AkLgq_nP4jRmAnc47iAcfoILG77nLbWnMgCKrjGHG_yxOYcYAQzNvi-85g/exec";
+fetch(APPSCRIPT)
+  .then(res => res.json())
+  .then(items => {
+    let list = document.getElementById("list");
+    item.forEach(item => {
+      let a = document.createElement("a");
+      a.href = "item.html?id=" + item.id;
+      a.textContent = item.name + " $" + item.price;
+      list.appendChild(a);
+    });
+  });
+</script>
+</body>
+</html>
