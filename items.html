@@ -15,10 +15,10 @@ fetch(APPSCRIPT)
     let item = items.find(i=>i.id == id);
     let container = document.getElementById("item");
     if (item) {
-      container.innerHTML = '
+      container.innerHTML = `
         <h1>${item.name}</h1>
         <p>Price: $${item.price}</p>
-        ';
+      `;
      } else {
       container.innerHTML = "Item Not Found";
     }
