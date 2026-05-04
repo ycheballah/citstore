@@ -13,7 +13,7 @@
   --white:        #ffffff;
   --sand:         #f8f5f0;
 
-  --text-dark:    #0a1628;
+  --text-dark:    #ffffff;
   --text-body:    #2c3e55;
   --text-muted:   #7a96b0;
 
@@ -38,7 +38,28 @@
   margin: 0;
   padding: 0;
 }
+.banner-container {
+  position: relative;
+  width:50%;
+  height: 50vh; /* Full viewport height */
+  overflow: hidden;
+}
 
+.back-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 20%;
+  min-height: 10%;
+  z-index: -1; /* Pushes video behind content */
+  object-fit: cover; /* Ensures video covers area without stretching */
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1; /* Keeps text above video */
+  /* Add styling for text color/alignment here */
+}
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
