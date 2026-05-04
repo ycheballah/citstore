@@ -5,21 +5,49 @@
 </head>
 <body>
 <h1>Items</h1>
-<div id="list"></div>
+<div id="list">Loading...</div>
 <link rel="stylesheet" href="store. css">
 <script>
-const APPSCRIPT = "https://script.google.com/macros/s/AKfycbyHAhqFdsQqiGng7AN76cn4KEZ9qocoX6Zya5dKAPlf9sSvHgYYomWj5IKqKcxlYlDrQA/exec";
-fetch(APPSCRIPT)
-  .then(res => res.json())
-  .then(items => {
-    let list = document.getElementById("list");
-    item.forEach(item => {
-      let a = document.createElement("a");
+const scriptURL = "https://script.google.com/macros/s/AKfycbyljcQ1Kd-PN78c2f0k-t8wreE7nDR0hpH4hh38KkS4tlhm0aHn8gl9zmAffLMnKxekFA/exec";
+document.addEventListener("DOMContentLoaded", () => {
+  loadItems();
+});
+function loadItems() {
+  const list = document.getElementById("list");
+  list.innerHTML = "Loading items...";
+  const callbackName = "jsonpCallback_" + Math.floor(Math.random() * 1000000);
+  const script = document.createElement("script");
+  window[callbackName] = function(data) {
+    list.innerHTML = "";
+    if (!data || data.length === 0) {
+      list.innerHTML = "No items found.";
+      cleanup();
+      return;
+    }
+    data.forEach(item => {
+      const a = document.createElement("a");
       a.href = "item.html?id=" + item.id;
-      a.textContent = item.name + " $" + item.price;
+      a.textContent = `${item.name} $${item.price}`;
+      a.style.display = "block";
+      a.style.margin = "10px 0";
       list.appendChild(a);
     });
-  });
+    cleanup();
+  };
+
+  script.onerror = function() {
+    list.innerHTML = "Error loading store.";
+    cleanup();
+  };
+  function cleanup() {
+    if (document.body.contains(script)) {
+      document.body.removeChild(script);
+    }
+    delete window[callbackName];
+  }
+  script.src = `${scriptURL}?action=getItems&callback=${callbackName}`;
+  document.body.appendChild(script);
+}
 </script>
 </body>
 </html>
