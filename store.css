@@ -22,7 +22,7 @@
 
   --radius-sm:    6px;
   --radius-md:    14px;
-  --radius-lg:    28px;
+  --radius-lg:    1000px;
   --radius-full:  9999px;
 
   --shadow-soft:  0 2px 20px rgba(10, 22, 40, 0.08);
@@ -40,8 +40,8 @@
 }
 .banner-container {
   position: relative;
-  width:50%;
-  height: 50vh; /* Full viewport height */
+  width: 100%;
+  height: 70vh;
   overflow: hidden;
 }
 
@@ -52,13 +52,24 @@
   min-width: 20%;
   min-height: 10%;
   z-index: -1; /* Pushes video behind content */
-  object-fit: cover; /* Ensures video covers area without stretching */
-}
+  object-fit: cover; /* Ensures video covers area without stretching */}
 
 .banner-content {
   position: relative;
   z-index: 1; /* Keeps text above video */
-  /* Add styling for text color/alignment here */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 100px; 
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+  z-index: 1; /* Ensures it stays on top of the image */
 }
 html {
   scroll-behavior: smooth;
