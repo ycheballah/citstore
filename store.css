@@ -699,6 +699,7 @@ p  { color: var(--text-body); max-width: 60ch; }
   gap: 1rem;
 }
 
+
 /* ── Form Elements ───────────────────────────────── */
 .input {
   width: 100%;
