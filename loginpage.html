@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f4;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <div id="message"></div>
+</div>
+
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyljcQ1Kd-PN78c2f0k-t8wreE7nDR0hpH4hh38KkS4tlhm0aHn8gl9zmAffLMnKxekFA/exec";
+  async function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("YOUR_WEB_APP_URL", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      document.getElementById("message").style.color = "green";
+      document.getElementById("message").innerText = result.message;
+
+      // redirect example
+      // window.location.href = "dashboard.html";
+    } else {
+      document.getElementById("message").innerText = result.message;
+    }
+  }
+</script>
+
+</body>
+</html>
