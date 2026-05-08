@@ -50,11 +50,11 @@
   align-items: center;
   color: white;
   padding-top: 10px;
+  padding-bottom: 10px;
 
 }
 
 nav {
-  height: 50px;
   width: 100%;
   background-color: var(--blue-mid);
 
