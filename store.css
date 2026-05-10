@@ -565,6 +565,13 @@ p  { color: var(--text-body); max-width: 60ch; }
   color: white;
 }
 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
 /* ── Banner / Promo Strip ───────────────────────── */
 .promo-strip {
   background: var(--blue-deep);
