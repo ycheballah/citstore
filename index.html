@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>CIT Store</title>
   <link rel="stylesheet" href="store.css">
+
+  <!-- Navigation bar at the top -->
+<nav>
+  <ul>
+    <div class= "header-container">
+    <a href="index.html">Home</a>
+    <a href="admin.html">Admin</a>
+    <a href="loginpage.html">Admin Login</a>
+    <a href="items.html">Items Page</a>
+    </div>
+  </ul>
+</nav>
 
 </head>
 <div class="banner-container">
@@ -17,8 +30,48 @@
       <h1>CIT STORE</h1>
   </div>
 </div>
+</div>
+<div id="list" class="product-grid"></div>
+<template id="product-template">
+  <div class ="product-card">
+    <div class="product-card__image">
+      <img src="" alt="">
+      <div class="product-card__badge">NEW</div>
+    </div>
+
+    <div class="product-card__body">
+      <div class="product-card__category"></div>
+      <div class="product-card__name"></div>
+
+      <div class="product-card__footer">
+        <div class="product-card__price"></div>
+        <button class="product-card__add">+</button>
+      </div>
+    </div>
+  </div>
+</template>
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbyljcQ1Kd-PN78c2f0k-t8wreE7nDR0hpH4hh38KkS4tlhm0aHn8gl9zmAffLMnKxekFA/exec";
+function renderProducts(products) {
+  const list = document.getElementById("list");
+  const template = document.getElementById("product-template");
+  list.innerHTML = "";
+  
+  products.forEach(item => {
+    const clone = template.content.cloneNode(true);
+    const el = (sel) => clone.querySelector(sel);
+    el("img").src = item.image || "https://animeape.com/wp-content/uploads/2024/03/Link-The-Legend-of-Zelda_Zip-Hoodie-Jacket-BACK-mockup.jpg";
+    el("img").alt = item.name;
+    
+    el(".product-card__category").textContent = item.category || "Items";
+    el(".product-card__name").textContent = item.name;
+    el(".product-card__price").textContent = `$${item.price}`;
+    const card = el(".product-card");
+    card.onclick = () =>
+      window.location.href = "item.html?id=" + item.id;
+    list.appendChild(clone)
+  });
+}
 document.addEventListener("DOMContentLoaded", () => {
   loadItems();
 });
@@ -34,14 +87,7 @@ function loadItems() {
       cleanup();
       return;
     }
-    data.forEach(item => {
-      const a = document.createElement("a");
-      a.href = "item.html?id=" + item.id;
-      a.textContent = `${item.name} $${item.price}`;
-      a.style.display = "block";
-      a.style.margin = "10px 0";
-      list.appendChild(a);
-    });
+    renderProducts(data);
     cleanup();
   };
 
